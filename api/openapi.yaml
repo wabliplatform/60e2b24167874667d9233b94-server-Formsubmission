@@ -1,0 +1,174 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: lampralexandros@gmail.com
+  description: This is a sample openApi document
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://wabli.netlify.app/
+  title: TempApi
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- description: solid-spoon
+  url: http://83.212.100.226:3001/v1
+security:
+- {}
+tags:
+- description: not yet ready
+  name: quest
+paths:
+  /quest:
+    post:
+      operationId: createquest
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quest'
+        description: data to be created
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quest'
+          description: successful operation
+      summary: Creates the data
+      tags:
+      - quest
+      x-eov-operation-handler: controllers/QuestController
+  /quest/{questId}:
+    delete:
+      operationId: deletequest
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: questId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+      summary: Delete the element
+      tags:
+      - quest
+      x-eov-operation-handler: controllers/QuestController
+    get:
+      operationId: getquest
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: questId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quest'
+          description: successful operation
+      summary: Get the element
+      tags:
+      - quest
+      x-eov-operation-handler: controllers/QuestController
+    put:
+      operationId: updatequest
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: questId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/quest'
+        description: data to be updated
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/quest'
+          description: successful operation
+      summary: Updates the element
+      tags:
+      - quest
+      x-eov-operation-handler: controllers/QuestController
+  /quest/getAll:
+    get:
+      operationId: getAllquest
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/quest'
+                type: array
+          description: successful operation
+      summary: Get all the data
+      tags:
+      - quest
+      x-method-getAll: "true"
+      x-eov-operation-handler: controllers/QuestController
+  /quest/getByParams:
+    get:
+      operationId: getByParamsquest
+      parameters:
+      - description: the query based on which the search is performed
+        explode: true
+        in: query
+        name: filter
+        required: true
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/quest'
+                type: array
+          description: successful operation
+      summary: Get all the data based on user query
+      tags:
+      - quest
+      x-method-get-by-params: "true"
+      x-eov-operation-handler: controllers/QuestController
+components:
+  schemas:
+    quest:
+      example:
+        paperD: paperD
+        lcodetools: lcodetools
+        _id: _id
+      properties:
+        _id:
+          type: string
+        paperD:
+          type: string
+        lcodetools:
+          type: string
+      required:
+      - lcodetools
+      - paperD
+      type: object
